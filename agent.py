@@ -1,6 +1,6 @@
 from google import genai
 from google.genai import types
-from google.genai.types import GenerativeContentConfig,GoogleSearch,Tool,Part
+from google.genai.types import GenerateContentConfig,GoogleSearch,Tool,Part
 from functools import lru_cache
 import base64
 import os
@@ -60,7 +60,7 @@ def load_client(gcp_project_id, gcp_region):
         raise Exception("Error initialising Vertex Client.") from e
  
 @lru_cache
-def initialize_modol_config()-> GenerativeContentConfig:
+def initialize_model_config()-> GenerateContentConfig:
     """Creates the configuration for the Gemini model. Sets up the system prompt that instructs the model to act as
     Rick. Also configures the model's generation parameters and
     enables the Google Search tool for answering questions outside its
@@ -184,4 +184,4 @@ def get_rick_bot_response(client, chat_history: list[dict], model_config: Genera
              yield chunk.text
 
     except Exception as e:
-        raise Exception("Error in generation") from e         
+        raise Exception("Error in generation") from e
